@@ -13,9 +13,9 @@ jobs:
       - name: Check Env
         run: env
       - name: Docker Build
-        run: docker build -t "${DOCKER_REGISTRY}/shug/demo:v1" .
+        run: docker build -t "${{secrets.DOCKER_REGISTRY}}/shug/demo:v1" .
       - name: Docker Login
-        run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWD" "$DOCKER_REGISTRY"
+        run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWD}} ${{DOCKER_REGISTRY}}
       - name: Docker Push
-        run: docker push "${DOCKER_REGISTRY}/shug/demo:v1"
+        run: docker push "${{DOCKER_REGISTRY}}/shug/demo:v1"
 
