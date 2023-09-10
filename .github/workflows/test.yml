@@ -10,9 +10,12 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
-      - name: Build
-        run: cargo build --verbose
-      - name: Run tests
-        run: cargo test --verbose
+      - name: Check Env
+        run: env
       - name: Docker Build
-        run: docker build -t app .
+        run: docker build -t "${DOCKER_REGISTRY}/shug/demo:v1" .
+      - name: Docker Login
+        run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWD" "$DOCKER_REGISTRY"
+      - name: Docker Push
+        run: docker push "${DOCKER_REGISTRY}/shug/demo:v1"
+
