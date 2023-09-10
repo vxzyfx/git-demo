@@ -43,6 +43,6 @@ jobs:
           echo "The matrix context is:"
           echo "${{ toJson(matrix) }}"
       - run: |
-        export FOO=bar
-        echo "::set-env name=FOO::$FOO"
+          export FOO=bar
+          echo "::set-env name=FOO::$FOO"
       - run: echo $FOO
