@@ -14,7 +14,7 @@ jobs:
         run: env
       - name: Docker
         run: |
-          export VERSION=$(date +%s)
+          export VERSION="1.0"
           export TAG="${{secrets.DOCKER_REGISTRY}}/${{secrets.DOCKER_PACKAGE}}"
           docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWD }} ${{secrets.DOCKER_REGISTRY}}
           docker build -t "${TAG}:${VERSION}" .
