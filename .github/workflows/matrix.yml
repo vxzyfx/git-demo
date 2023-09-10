@@ -44,5 +44,5 @@ jobs:
           echo "${{ toJson(matrix) }}"
       - run: |
           export FOO=bar
-          echo "::set-env name=FOO::$FOO"
+          echo "FOO=$FOO" >> "$GITHUB_ENV"
       - run: echo $FOO
