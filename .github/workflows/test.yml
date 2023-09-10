@@ -12,10 +12,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: Check Env
         run: env
+      - name: Docker Login
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWD }} ${{ secrets.DOCKER_REGISTRY }}
       - name: Docker Build
         run: docker build -t "${{secrets.DOCKER_REGISTRY}}/shug/demo:v1" .
-      - name: Docker Login
-        run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWD}} ${{DOCKER_REGISTRY}}
       - name: Docker Push
         run: docker push "${{DOCKER_REGISTRY}}/shug/demo:v1"
 
