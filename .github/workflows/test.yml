@@ -12,14 +12,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: Check Env
         run: env
-      - name: Set Version
+      - name: Docker
         run: |
           export VERSION=$(date +%s)
           export TAG="${{secrets.DOCKER_REGISTRY}}/${{secrets.DOCKER_PACKAGE}}"
-      - name: Docker Login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWD }} ${{secrets.DOCKER_REGISTRY}}
-      - name: Docker Build
-        run: docker build -t "${TAG}:${VERSION}" .
-      - name: Docker Push
-        run: docker push "${TAG}:${VERSION}"
-
+          docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWD }} ${{secrets.DOCKER_REGISTRY}}
+          docker build -t "${TAG}:${VERSION}" .
+          docker push "${TAG}:${VERSION}"
